@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Bests</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e1f24, #0d0d10);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        /* Container styling */
+        .personal-bests-container {
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            text-align: center;
+        }
+        /* Title styling */
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #4CAF50;
+            text-shadow: 0 0 10px #4CAF50;
+        }
+        /* Grid layout for personal bests */
+        .personal-bests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        /* Card styling */
+        .personal-best-card {
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .personal-best-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px #4CAF50;
+        }
+        /* Record title */
+        .record-title {
+            font-size: 1.5rem;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px #4CAF50;
+        }
+        /* Record details */
+        .record-detail {
+            font-size: 1rem;
+            color: #dcdcdc;
+            margin-bottom: 10px;
+        }
+        /* Progress bar */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            height: 8px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #81C784);
+            width: 0%; /* Initial width */
+            transition: width 0.4s ease;
+        }
+        /* Background animation */
+        .glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.2), transparent);
+            animation: rotate 8s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0); }
+            to { transform: rotate(360deg); }
+        }
+        /* Button styling */
+        .update-btn {
+            margin-top: 15px;
+            padding: 5px 15px;
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .update-btn:hover {
+            background-color: #388E3C;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="personal-bests-container">
+        <div class="title">🏆 Personal Bests</div>
+        
+        <!-- Glow effect -->
+        <div class="glow"></div>
+        
+        <!-- Grid layout for personal bests -->
+        <div class="personal-bests-grid">
+            <div class="personal-best-card">
+                <div class="record-title">Fastest 5K Run</div>
+                <p class="record-detail">Time: <span id="run-time">20:45</span> min</p>
+                <p class="record-detail">Goal: Sub-20 Minutes</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="run-progress"></div>
+                </div>
+                <button class="update-btn" onclick="updateProgress('run-progress', 75)">Update Progress</button>
+            </div>
+            
+            <div class="personal-best-card">
+                <div class="record-title">Max Bench Press</div>
+                <p class="record-detail">Weight: <span id="bench-weight">100kg</span></p>
+                <p class="record-detail">Goal: 120kg</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="bench-progress"></div>
+                </div>
+                <button class="update-btn" onclick="updateProgress('bench-progress', 50)">Update Progress</button>
+            </div>
+
+            <div class="personal-best-card">
+                <div class="record-title">Longest Plank Hold</div>
+                <p class="record-detail">Duration: <span id="plank-time">5 min</span></p>
+                <p class="record-detail">Goal: 10 min</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="plank-progress"></div>
+                </div>
+                <button class="update-btn" onclick="updateProgress('plank-progress', 30)">Update Progress</button>
+            </div>
+
+            <div class="personal-best-card">
+                <div class="record-title">Max Squat</div>
+                <p class="record-detail">Weight: <span id="squat-weight">150kg</span></p>
+                <p class="record-detail">Goal: 180kg</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="squat-progress"></div>
+                </div>
+                <button class="update-btn" onclick="updateProgress('squat-progress', 83)">Update Progress</button>
+            </div>
+
+            <div class="personal-best-card">
+                <div class="record-title">Most Push-Ups in 1 Minute</div>
+                <p class="record-detail">Count: <span id="pushup-count">45</span></p>
+                <p class="record-detail">Goal: 50</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="pushup-progress"></div>
+                </div>
+                <button class="update-btn" onclick="updateProgress('pushup-progress', 90)">Update Progress</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to update the progress bar dynamically
+        function updateProgress(id, percentage) {
+            const progressBar = document.getElementById(id);
+            progressBar.style.width = percentage + '%';
+        }
+    </script>
+
+</body>
+</html>
