@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker Dashboard</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Background and font */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* Container for dashboard sections */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 80%;
+            max-width: 1000px;
+            padding: 2rem;
+        }
+        /* Styling each section */
+        .section {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+        .section p {
+            color: #ffffff;
+        }
+        .section:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+        /* Add some animation to the title */
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: fadeInTitle 2s ease-out forwards;
+        }
+        /* Welcome text fade-in */
+        .welcome-message {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 2s ease-out forwards;
+        }
+        /* Animations */
+        @keyframes fadeInTitle {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Add a glow effect around section titles */
+        .section h2::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 15px;
+        }
+        .section:hover h2::after {
+            opacity: 1;
+        }
+        img {
+  position: absolute;
+  z-index: -1;
+  width: 1500px;
+  height: auto;
+}
+    </style>
+</head>
+<body>
+    <img src="pexels-victorfreitas-841131.jpg" alt="background">
+
+    <div class="title">Fitness Tracker Dashboard</div>
+    <div class="welcome-message">Welcome back! Ready to hit your fitness goals?</div>
+
+    <div class="container">
+        <div class="section" onclick="location.href='active-calories.html'">
+            <h2>Active Calories</h2>
+            <p>500 Today</p>
+            <p>3500 This Week</p>
+            <p>14K This Month</p>
+        </div>
+        <div class="section" onclick="location.href='weekly-schedule.html'">
+            <h2>Weekly Schedule</h2>
+            <p>Check your weekly exercise plan.</p>
+        </div>
+        
+        <div class="section" onclick="location.href='personal-bests.html'">
+            <h2>Personal Bests</h2>
+            <p>See your best performance records.</p>
+        </div>
+        <div class="section" onclick="location.href='challenges.html'">
+            <h2>Challenges</h2>
+            <p>Track your progress on challenges.</p>
+        </div>
+        
+    </div>
+
+    <script>
+        // Simple animation for the welcome message
+        document.addEventListener("DOMContentLoaded", function() {
+            const welcomeMessage = document.querySelector(".welcome-message");
+            welcomeMessage.style.opacity = "1";
+        });
+    </script>
+</body>
+</html>
