@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenges</title>
+    <link rel="url" href="index.html">
+    <link rel="url" href="active-calories.html">
+    <link rel="url" href="personal-bests.html">
+    <link rel="url" href="weekly-schedule.html">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1b1b1f, #121214);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* Container styling */
+        .challenges-container {
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+        /* Title styling */
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ff6b6b;
+            text-shadow: 0 0 10px #ff6b6b;
+        }
+        /* Grid layout for challenges */
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        /* Challenge card styling */
+        .challenge-card {
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            transition: background 0.3s ease, transform 0.3s ease;
+            overflow: hidden;
+        }
+        .challenge-card:hover {
+            background: rgba(255, 107, 107, 0.2);
+            transform: translateY(-5px);
+        }
+        /* Challenge title styling */
+        .challenge-title {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px #ff6b6b;
+        }
+        /* Challenge description */
+        .challenge-desc {
+            font-size: 1rem;
+            color: #dcdcdc;
+            margin-bottom: 15px;
+        }
+        /* Progress bar styling */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            height: 8px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ffdf6b);
+            width: 0;
+            transition: width 0.4s ease;
+        }
+        .challenge-card:hover .progress-bar {
+            width: 80%; /* Adjust width dynamically based on actual progress */
+        }
+        /* Button styling */
+        .start-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            color: #ff6b6b;
+            background: transparent;
+            border: 2px solid #ff6b6b;
+            border-radius: 20px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .start-button:hover {
+            background: #ff6b6b;
+            color: #111;
+            box-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b;
+        }
+        /* Background animations */
+        .background-animations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .circle {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            animation: move 7s linear infinite;
+            opacity: 0.3;
+        }
+        /* Circle animation */
+        @keyframes move {
+            from {
+                transform: translateY(0) translateX(0);
+                opacity: 0.5;
+            }
+            to {
+                transform: translateY(100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="challenges-container">
+        <div class="title">Weekly Challenges</div>
+        
+        <!-- Grid layout for challenges -->
+        <div class="challenges-grid">
+            <div class="challenge-card">
+                <div class="challenge-title">5K Steps Challenge</div>
+                <p class="challenge-desc">Complete 5,000 steps each day this week to stay active and healthy.</p>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="start-button">Start Challenge</div>
+            </div>
+            <div class="challenge-card">
+                <div class="challenge-title">10-Min Meditation</div>
+                <p class="challenge-desc">Practice 10 minutes of mindfulness meditation daily for mental clarity.</p>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="start-button">Start Challenge</div>
+            </div>
+            <div class="challenge-card">
+                <div class="challenge-title">Hydration Goal</div>
+                <p class="challenge-desc">Drink 8 glasses of water per day to stay hydrated and energized.</p>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="start-button">Start Challenge</div>
+            </div>
+        </div>
+
+        <!-- Background animations for high-tech effect -->
+        <div class="background-animations" id="background-animations"></div>
+    </div>
+
+    <script>
+        // Generate background animation circles
+        const animationContainer = document.getElementById("background-animations");
+        for (let i = 0; i < 30; i++) {
+            const circle = document.createElement("div");
+            circle.classList.add("circle");
+            circle.style.top = `${Math.random() * 100}vh`;
+            circle.style.left = `${Math.random() * 100}vw`;
+            circle.style.animationDuration = `${Math.random() * 7 + 5}s`;
+            animationContainer.appendChild(circle);
+        }
+    </script>
+</body>
+</html>
