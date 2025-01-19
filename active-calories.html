@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Calories</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Background and font */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle, #1a1a1d, #111);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* Container styling */
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        /* Heading styling */
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #080202;
+            text-shadow: 0 0 10px #0a0902;
+        }
+        /* Progress rings */
+        .progress-ring {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+        .circle-bg,
+        .circle-progress {
+            fill: none;
+            stroke-width: 15;
+        }
+        .circle-bg {
+            stroke: rgba(255, 255, 255, 0.1);
+        }
+        .circle-progress {
+            stroke: #0c0b05;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease;
+        }
+        /* Stats with animated counter */
+        .calories-stat {
+            font-size: 2rem;
+            margin-top: 10px;
+            color: #f61313;
+        }
+        .counter {
+            font-size: 3rem;
+            color: #f61313;
+            text-shadow: 0 0 10px #f61313;
+        }
+        /* Glowing button */
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: #f61313;
+            background: transparent;
+            border: 2px solid #f61313;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: #0e0c03;
+            color: #f61313;
+            box-shadow: 0 0 10px #000000, 0 0 20px #ff0000;
+        }
+        /* Particle effect */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff3700;
+            border-radius: 50%;
+            animation: move 3s linear infinite;
+        }
+        @keyframes move {
+            from {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) translateX(30px);
+                opacity: 0;
+            }
+        }
+        img{
+  position: absolute;
+  z-index: -1;
+  width: 1500px;
+  height: auto;
+}
+    </style>
+</head>
+<body>
+    <img src="cyclist-3202481_1920.jpg" alt="background">
+
+    <div class="container">
+        <div class="title">Active Calories</div>
+
+        <!-- Progress ring -->
+        <div class="progress-ring">
+            <svg width="200" height="200">
+                <circle class="circle-bg" cx="100" cy="100" r="80"></circle>
+                <circle class="circle-progress" cx="100" cy="100" r="80" stroke-dasharray="502" stroke-dashoffset="502"></circle>
+            </svg>
+        </div>
+
+        <!-- Calorie counters -->
+        <div class="calories-stat">Today: <span class="counter" id="today-calories">0</span> kcal</div>
+        <div class="calories-stat">This Week: <span class="counter" id="week-calories">0</span> kcal</div>
+        <div class="calories-stat">This Month: <span class="counter" id="month-calories">0</span> kcal</div>
+
+        <!-- Back button -->
+        <button class="back-button" onclick="window.location.href='index.html'">Back to Dashboard</button>
+
+        <!-- Particle effect -->
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <script>
+        // Counter animation for calories
+        function animateCounter(id, endValue) {
+            let startValue = 0;
+            const duration = 2000;
+            const increment = endValue / (duration / 20);
+
+            const counter = document.getElementById(id);
+            const interval = setInterval(() => {
+                startValue += increment;
+                if (startValue >= endValue) {
+                    clearInterval(interval);
+                    counter.textContent = Math.floor(endValue);
+                } else {
+                    counter.textContent = Math.floor(startValue);
+                }
+            }, 20);
+        }
+
+        // Animate progress ring
+        function animateProgressRing(percentage) {
+            const circle = document.querySelector('.circle-progress');
+            const radius = circle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            const offset = circumference - (percentage / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+        }
+
+        // Initialize counters and progress ring
+        document.addEventListener("DOMContentLoaded", () => {
+            animateCounter("today-calories", 500);
+            animateCounter("week-calories", 3500);
+            animateCounter("month-calories", 14000);
+            animateProgressRing(35);  // For example, 35% of goal
+        });
+
+        // Generate particles
+        const particlesContainer = document.getElementById("particles");
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement("div");
+            particle.classList.add("particle");
+            particle.style.top = `${Math.random() * 100}vh`;
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
