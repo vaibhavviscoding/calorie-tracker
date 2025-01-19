@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Schedule</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1d, #111);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* Container styling */
+        .schedule-container {
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+        /* Title styling */
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #00c9ff;
+            text-shadow: 0 0 10px #00c9ff;
+        }
+        /* Grid styling */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        /* Day box styling */
+        .day-box {
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 201, 255, 0.3);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .day-box:hover {
+            background: rgba(0, 201, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        /* Day title styling */
+        .day-title {
+            font-size: 1.5rem;
+            color: #00c9ff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px #00c9ff;
+        }
+        /* Activity list */
+        .activity-list {
+            list-style: none;
+            font-size: 1rem;
+            color: #dcdcdc;
+        }
+        .activity-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Glowing Add button */
+        .add-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            color: #00c9ff;
+            background: transparent;
+            border: 2px solid #00c9ff;
+            border-radius: 20px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .add-button:hover {
+            background: #00c9ff;
+            color: #111;
+            box-shadow: 0 0 10px #00c9ff, 0 0 20px #00c9ff;
+        }
+        /* Background animations */
+        .background-animations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .circle {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #00c9ff;
+            border-radius: 50%;
+            animation: move 5s linear infinite;
+            opacity: 0.3;
+        }
+        /* Circle animation */
+        @keyframes move {
+            from {
+                transform: translateY(0) translateX(0);
+                opacity: 0.5;
+            }
+            to {
+                transform: translateY(100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+        img {
+  position: absolute;
+  z-index: -1;
+  width: 1500px;
+  height: auto;
+}
+        
+    </style>
+</head>
+<body>
+    <img src="pexels-leonardho-1552252.jpg" alt="background">
+
+    <div class="schedule-container">
+        <div class="title">Weekly Schedule</div>
+        
+        <!-- Grid layout for days of the week -->
+        <div class="schedule-grid">
+            <div class="day-box">
+                <div class="day-title">Monday</div>
+                <ul class="activity-list">
+                    <li>7:00 AM - Workout</li>
+                    <li>9:00 AM - Team Meeting</li>
+                    <li>1:00 PM - Project Work</li>
+                </ul>
+            </div>
+            <div class="day-box">
+                <div class="day-title">Tuesday</div>
+                <ul class="activity-list">
+                    <li>7:00 AM - Yoga</li>
+                    <li>10:00 AM - Coding Session</li>
+                    <li>3:00 PM - Presentation</li>
+                </ul>
+            </div>
+            <div class="day-box">
+                <div class="day-title">Wednesday</div>
+                <ul class="activity-list">
+                    <li>7:00 AM - Cardio</li>
+                    <li>11:00 AM - Workshop</li>
+                    <li>4:00 PM - Review Meeting</li>
+                </ul>
+            </div>
+            <div class="day-box">
+                <div class="day-title">Thursday</div>
+                <ul class="activity-list">
+                    <li>8:00 AM - Meditation</li>
+                    <li>1:00 PM - Research Time</li>
+                    <li>5:00 PM - Team Sync</li>
+                </ul>
+            </div>
+            <div class="day-box">
+                <div class="day-title">Friday</div>
+                <ul class="activity-list">
+                    <li>7:30 AM - HIIT</li>
+                    <li>10:00 AM - Brainstorming</li>
+                    <li>2:00 PM - Demo Session</li>
+                </ul>
+            </div>
+            <div class="day-box">
+                <div class="day-title">Saturday</div>
+                <ul class="activity-list">
+                    <li>10:00 AM - Hiking</li>
+                    <li>1:00 PM - Study Group</li>
+                    <li>5:00 PM - Family Time</li>
+                </ul>
+            </div>
+            <div class="day-box">
+                <div class="day-title">Sunday</div>
+                <ul class="activity-list">
+                    <li>9:00 AM - Rest & Recover</li>
+                    <li>11:00 AM - Brunch</li>
+                    <li>4:00 PM - Weekly Review</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Add new activity button -->
+        <div class="add-button">Add New Activity</div>
+
+        <!-- Background animations for high-tech effect -->
+        <div class="background-animations" id="background-animations"></div>
+    </div>
+
+    <script>
+        // Generate background animation circles
+        const animationContainer = document.getElementById("background-animations");
+        for (let i = 0; i < 30; i++) {
+            const circle = document.createElement("div");
+            circle.classList.add("circle");
+            circle.style.top = `${Math.random() * 100}vh`;
+            circle.style.left = `${Math.random() * 100}vw`;
+            circle.style.animationDuration = `${Math.random() * 5 + 3}s`;
+            animationContainer.appendChild(circle);
+        }
+    </script>
+</body>
+</html>
